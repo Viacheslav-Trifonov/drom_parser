@@ -14,6 +14,8 @@ useragent = UserAgent()
 
 #options.add_argument("--headless")
 options = webdriver.ChromeOptions()
+options.add_argument('--ignore-certificate-errors')
+options.add_argument('--ignore-ssl-errors')
 options.add_argument("start-maximized")
 options.add_argument(f"user-agent={useragent.random}")
 options.add_experimental_option("excludeSwitches", ["enable-automation"])
