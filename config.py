@@ -4,10 +4,9 @@ from selenium_stealth import stealth
 from fake_useragent import UserAgent
 import time
 from selenium.webdriver.common.by import By
-from selenium.common import NoSuchElementException
+from selenium_stealth import stealth
 import csv
-from selenium.webdriver import ActionChains
-from selenium.webdriver.support import expected_conditions as EC
+
 
 
 useragent = UserAgent()
@@ -50,11 +49,12 @@ def create_table():
     with open('res.csv', 'w', encoding='utf-8-sig', newline='') as file:
         writer = csv.writer(file, delimiter=';')
         writer.writerow([
-            'Марка, Модель', 'Цена', 'Телефон', 'Ссылка на объявление'])
+            'Марка, Модель', 'Цена', 'Ссылка на объявление'])
+
 
 def login_on_site():
     driver.get(link_registration)
-    time.sleep(5)
+    time.sleep(10)
     print('Введите логин:')
     login = input()
     login_field = driver.find_element(By.XPATH, "//input[@name='sign']").send_keys(login)
@@ -67,6 +67,11 @@ def login_on_site():
     time.sleep(3)
     enter_site.click()
     time.sleep(3)
+
+
+
+
+
 
 
 
