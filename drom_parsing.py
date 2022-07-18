@@ -18,6 +18,7 @@ links = []
 prices = []
 models = []
 
+
 def parse():
     time.sleep(2)
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
@@ -32,6 +33,7 @@ def parse():
         models.append(m.text)
     for p in price:
         prices.append(p.text)
+
 
 try:
     driver.get(search_link)
@@ -63,16 +65,3 @@ finally:
         for i in range(len(prices)):
             writer.writerow([models[i], prices[i], links[i]])
     print('Отчёт сформирован')
-
-
-
-
-
-
-
-
-
-
-
-
-

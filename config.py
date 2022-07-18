@@ -8,10 +8,7 @@ from selenium_stealth import stealth
 import csv
 
 
-
 useragent = UserAgent()
-
-
 options = webdriver.ChromeOptions()
 #options.add_argument("--headless")
 options.add_argument('--ignore-certificate-errors')
@@ -32,6 +29,7 @@ driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
           navigator.__proto__ = newProto
           """
     })
+
 stealth(driver,
         languages=["en-US", "en"],
         vendor="Google Inc.",
@@ -40,6 +38,7 @@ stealth(driver,
         renderer="Intel Iris OpenGL Engine",
         fix_hairline=True,
         )
+
 
 link_registration = 'https://my.drom.ru/sign?return=https%3A%2F%2Fwww.drom.ru%2F%3Ftcb%3D1657863275'
 codes_of_the_subjects = 'https://codificator.ru/code/car.html'
@@ -67,13 +66,3 @@ def login_on_site():
     time.sleep(3)
     enter_site.click()
     time.sleep(3)
-
-
-
-
-
-
-
-
-
-
