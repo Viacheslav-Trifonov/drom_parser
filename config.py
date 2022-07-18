@@ -12,8 +12,9 @@ from selenium.webdriver.support import expected_conditions as EC
 
 useragent = UserAgent()
 
-#options.add_argument("--headless")
+
 options = webdriver.ChromeOptions()
+#options.add_argument("--headless")
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
 options.add_argument("start-maximized")
