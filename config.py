@@ -1,68 +1,16 @@
-from selenium import webdriver
-import undetected_chromedriver
-from selenium_stealth import stealth
-from fake_useragent import UserAgent
-import time
 from selenium.webdriver.common.by import By
-from selenium_stealth import stealth
-import csv
-
-
-useragent = UserAgent()
-options = webdriver.ChromeOptions()
-#options.add_argument("--headless")
-options.add_argument('--ignore-certificate-errors')
-options.add_argument('--ignore-ssl-errors')
-options.add_argument("start-maximized")
-options.add_argument(f"user-agent={useragent.random}")
-options.add_experimental_option("excludeSwitches", ["enable-automation"])
-options.add_experimental_option('useAutomationExtension', False)
-options.add_argument('user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36')
-options.add_argument('--disable-blink-features=AutomationControlled')
-
-driver = webdriver.Chrome(options=options)
-
-driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
-     "source": """
-          const newProto = navigator.__proto__
-          delete newProto.webdriver
-          navigator.__proto__ = newProto
-          """
-    })
-
-stealth(driver,
-        languages=["en-US", "en"],
-        vendor="Google Inc.",
-        platform="Win32",
-        webgl_vendor="Intel Inc.",
-        renderer="Intel Iris OpenGL Engine",
-        fix_hairline=True,
-        )
-
 
 link_registration = 'https://my.drom.ru/sign?return=https%3A%2F%2Fwww.drom.ru%2F%3Ftcb%3D1657863275'
 codes_of_the_subjects = 'https://codificator.ru/code/car.html'
 drom_link = 'https://auto.drom.ru/region'
 
-def create_table():
-    with open('res.csv', 'w', encoding='utf-8-sig', newline='') as file:
-        writer = csv.writer(file, delimiter=';')
-        writer.writerow([
-            'Марка, Модель', 'Цена', 'Ссылка на объявление'])
+login_locator = (By.XPATH, "//input[@name='sign']")
+password_locator = (By.XPATH, "//input[@name='password']")
+button_locator = (By.XPATH, "//button[@type='submit']")
 
+href_locator = (By.CSS_SELECTOR, "body > div:nth-child(3) > div.css-1iexluz.e1m0rp600 > div.css-1ojz5p3.e1m0rp601 > div.css-0.e1m0rp602 > div.css-1173kvb.eaczv700 > div:nth-child(1) > div:nth-child(2)")
+marka_locator = (By.XPATH, "//span[@data-ftid='bull_title']")
+price_locator = (By.XPATH, "//span[@data-ftid='bull_price']")
 
-def login_on_site():
-    driver.get(link_registration)
-    time.sleep(10)
-    print('Введите логин:')
-    login = input()
-    login_field = driver.find_element(By.XPATH, "//input[@name='sign']").send_keys(login)
-    print('Введите пароль:')
-    time.sleep(3)
-    password = input()
-    password_field = driver.find_element(By.XPATH, "//input[@name='password']").send_keys(password)
-    time.sleep(3)
-    enter_site = driver.find_element(By.XPATH, "//button[@type='submit']")
-    time.sleep(3)
-    enter_site.click()
-    time.sleep(3)
+not_found_page_locator = (By.XPATH, "//div[@class='b-media-cont b-text_size_l']")
+str1_locator = (By.XPATH, "//div[@class='css-14wh0pm e1lm3vns0']")
